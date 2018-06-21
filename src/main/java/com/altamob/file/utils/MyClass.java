@@ -1,32 +1,35 @@
 package com.altamob.file.utils;
 
-
-import com.google.common.base.Strings;
-
 import java.io.BufferedReader;
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class MyClass {
 
-    public static String test = "/fffffffCommonUtils.dc(\"k7k7k7r=\"/*fffff*/)dddddddd\n";
+    private static String test = "/fffffffCommonUtils.dc(\"k7k7k7r=\"/*fffff*/)dddddddd\n";
 
     private static String FILE_TYPE = ".java";
 
+    private static final String test1 = "/home/sym/Desktop/AppsflyerSdk/FileUtilLib/src/main/java/com/altamob/file/utils/DeviceInfo" + FILE_TYPE;
+    private static String path = "/home/sym/Desktop/src";
+
     public static void main(String args[]) {
 
-       // System.out.println(test = handleLine(test));
+        // System.out.println(test = handleLine(test));
        /* boolean b = test.startsWith("/");
         if (b){
             System.out.println("da");
         }*/
-        String test = "/home/sym/Desktop/AppsflyerSdk/FileUtilLib/src/main/java/com/altamob/file/utils/DeviceInfo"+FILE_TYPE;
-        String path = "/home/sym/Desktop/src";
+
+        if (args.length > 0) {
+            path = args[0];
+            System.out.println(path);
+        } else {
+            System.out.println("请输入路径");
+        }
 
 
         try {
@@ -55,6 +58,12 @@ public class MyClass {
                             String file1 = file2.getName();
                             if (file1.endsWith(FILE_TYPE)) {
                                 System.out.println(file2.getAbsoluteFile());
+                                if (file2.getName().equals(FILE_NAME)) {
+                                    if (file2.getAbsoluteFile().toString().contains("com" + File.separator + "mobi" + File.separator + "sdk" + File.separator + "utils." + FILE_NAME)) {
+                                        continue;
+                                    }
+                                }
+
                                 scanStr(file2);
                             }
                         }
@@ -82,10 +91,13 @@ public class MyClass {
         while ((line = bufferedReader.readLine()) != null) {
 
             //跳过空行
-            if (Strings.isNullOrEmpty(line)) {
+            if (line == null || line.isEmpty()) {
                 temp.append(System.getProperty("line.separator"));
                 continue;
-            } else if (line.trim().startsWith("/") || line.trim().startsWith("*")) {
+            } else if (line.trim().startsWith("/")
+                    || line.trim().startsWith("*")
+                    || line.trim().startsWith("@")) {
+
                 temp.write(line);
                 temp.append(System.getProperty("line.separator"));
                 continue;
@@ -101,11 +113,13 @@ public class MyClass {
         out.close();
     }
 
-    private static String features01 = "CommonUtils.dc(";
+    private static final String FILE_NAME = "EncryptUtils";
+
+    private static String FEATURES_01 = FILE_NAME + ".dc(";
 
     public static String handleLine(String src) {
 
-        if (Strings.isNullOrEmpty(src.trim())) {
+        if (isNullOrEmpty(src.trim())) {
             return src;
         }
 
@@ -123,12 +137,12 @@ public class MyClass {
 
                     //判断feature01 特征
                     int length;
-                    if (i >= (length = features01.length())) {
+                    if (i >= (length = FEATURES_01.length())) {
                         int pointer = i;
                         int poniterI = length;
                         boolean flag = true;
                         while (pointer > i - length) {
-                            if (chars[pointer - 1] == features01.charAt(poniterI - 1)) {
+                            if (chars[pointer - 1] == FEATURES_01.charAt(poniterI - 1)) {
                                 pointer--;
                                 poniterI--;
                             } else {
@@ -164,29 +178,14 @@ public class MyClass {
 
                     //过滤掉空字符串
                     String str = code.toString();
-                    if (Strings.isNullOrEmpty(str.trim())) {
+                    if (isNullOrEmpty(str.trim())) {
                         ret.append("\"");
                         ret.append(str);
                         ret.append("\"");
                         continue;
                     }
                     //开始
-                    ret.append('C');
-                    ret.append('o');
-                    ret.append('m');
-                    ret.append('m');
-                    ret.append('o');
-                    ret.append('n');
-                    ret.append('U');
-                    ret.append('t');
-                    ret.append('i');
-                    ret.append('l');
-                    ret.append('s');
-                    ret.append('.');
-                    ret.append('d');
-                    ret.append('c');
-                    ret.append('(');
-                    ret.append('\"');
+                    ret.append(FILE_NAME + ".dc(\"");
 
                     //内容
                     ret.append(EbcryptionUtils.ec(str));
@@ -195,10 +194,7 @@ public class MyClass {
                     //注释
                     ret.append("/*");
                     ret.append(str);
-                    ret.append("*/");
-                    //
-                    ret.append(')');
-
+                    ret.append("*/)");
                 }
 
 
@@ -215,6 +211,13 @@ public class MyClass {
         }
 
         return ret.toString();
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
 }

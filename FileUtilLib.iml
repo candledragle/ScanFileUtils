@@ -13,7 +13,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/build/classes/java/main" />
     <output-test url="file://$MODULE_DIR$/build/classes/java/test" />
     <exclude-output />
@@ -27,26 +27,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: guava-25.0-jre" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: commons-io-2.6" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: jsr305-1.3.9" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: checker-compat-qual-2.0.0" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: error_prone_annotations-2.1.3" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: j2objc-annotations-1.1" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Gradle: animal-sniffer-annotations-1.14" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: guava-25.0-jre" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: commons-io-2.6" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: jsr305-1.3.9" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: checker-compat-qual-2.0.0" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: error_prone_annotations-2.1.3" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: j2objc-annotations-1.1" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: animal-sniffer-annotations-1.14" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: guava-25.0-jre" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: commons-io-2.6" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: jsr305-1.3.9" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: checker-compat-qual-2.0.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: error_prone_annotations-2.1.3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: j2objc-annotations-1.1" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: animal-sniffer-annotations-1.14" level="project" />
   </component>
 </module>
