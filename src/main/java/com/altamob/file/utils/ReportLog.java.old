@@ -1,0 +1,1120 @@
+package com.altamob.file.utils;
+
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.text.TextUtils;
+
+import com.mobi.c.COBJ;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * ReportLog
+ * Created by Administrator on 2016/7/18.
+ */
+
+public class ReportLog {
+    private final static String TAG = EbcryptionUtils.dc("e73IHfFKNUAB"/*ReportLog*/);
+
+    public static void upLoadPost(String url, String token, String jsonData, Callback callback) {
+        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(jsonData)) {
+            return;
+        }
+        try {
+            if (TextUtils.isEmpty(token)) {
+                Context context = ADSDK.getContext();
+                if (context != null) {
+                    ApplicationInfo appInfo = context.getPackageManager()
+                            .getApplicationInfo(context.getPackageName(),
+                                    PackageManager.GET_META_DATA);
+                    token = appInfo.metaData.getString(EbcryptionUtils.dc("rauInM3Y"/*appKey*/));
+                }
+            }
+//            Request request = new Request.Builder().url(url).post(RequestBody.create(OkHttpUtil.JSON, jsonData)).addHeader("token", token != null ? token : "").tag("postLog").build();
+//            Request request = new Request.Builder().url(url).post(RequestBody.create(OkHttpUtil.JSON, jsonData)).addHeader(EbcryptionUtils.dc("WUAhktG="/*token*/), token != null ? token : EbcryptionUtils.dc("WUAhktG="/*token*/)).tag(EbcryptionUtils.dc("WUAhktYIHf/KNUAB"/*tokenpostLog*/)).build();
+////            LogUtil.d("upLoadPost:::::::::: " + url + "::::::" + jsonData + ":::::::" + request.headers());
+////            LogUtil.d(EbcryptionUtils.dc("WaucHM1-eUAiWsQ2yCQ2yCQ2yCQ8"/*upLoadPost:::::::::: */) + url + EbcryptionUtils.dc("WaucHM1-eUAiWsQ2yCQ2yCQ2yCQ8yCQ2yCQ2"/*upLoadPost:::::::::: ::::::*/) + jsonData + EbcryptionUtils.dc("WaucHM1-eUAiWsQ2yCQ2yCQ2yCQ8yCQ2yCQ2yCQ2yCQ2y8=="/*upLoadPost:::::::::: :::::::::::::*/) + request.headers());
+//            OkHttpUtil.enqueue(request, callback);
+//            OkHttpUtil.enqueue(request, callback);
+            if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+                return;
+            }
+            Map<String, String> headerMap = new HashMap<>();
+            headerMap.put(EbcryptionUtils.dc("WUAhktG="/*token*/), token);
+            headerMap.put(EbcryptionUtils.dc("lMAEWU3EWVmepauz"/*Content-Type*/), EbcryptionUtils.dc("lMAEWU3EWVmepauzrauIHUzCrabjHMGPoB/PH8=="/*Content-Typeapplication/json*/));
+            HttpHelperManager.getHttpHelper().doPost(url, headerMap, jsonData, callback);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void upLoadGet(String url) {
+        upLoadGet(url, null);
+    }
+
+//    public static void upLoadSimpleGet(String url, Callback callback) {
+//    public static void upLoadSimpleGet(String url, Callback callback) {
+//        Request request = new Request.Builder().url(url)
+//        Request request = new Request.Builder().url(url)
+//                .addHeader("token", SDKConstants.TOKEN).tag("postLog")
+//                .addHeader(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN).tag(EbcryptionUtils.dc("WUAhktYIHf/KNUAB"/*tokenpostLog*/))
+//                .get()
+//                .get()
+//                .build();
+//                .build();
+////        LogUtil.d("upLoadGet:::::::::: " + finalUrl + "::::::" + ":::::::" + request.headers());
+////        LogUtil.d(EbcryptionUtils.dc("WaucHM1-bM3KyCQ2yCQ2yCQ2yLX="/*upLoadGet:::::::::: */) + finalUrl + EbcryptionUtils.dc("WaucHM1-bM3KyCQ2yCQ2yCQ2yLX2yCQ2yCQ="/*upLoadGet:::::::::: ::::::*/) + EbcryptionUtils.dc("WaucHM1-bM3KyCQ2yCQ2yCQ2yLX2yCQ2yCQ2yCQ2yCQ2"/*upLoadGet:::::::::: :::::::::::::*/) + request.headers());
+//        OkHttpUtil.enqueue(request, callback);
+//        OkHttpUtil.enqueue(request, callback);
+//    }
+//    }
+
+    private static void upLoadGet(String url, Map<String, String> paramsMap, Map<String, String> headerMap) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
+        HttpHelperManager.getHttpHelper().doGet(url, paramsMap, headerMap, new LogCallBack(ADSDK.getContext(), url));
+//
+//
+//        try {
+//        try {
+//            Request.Builder requestBuilder = new Request.Builder();
+//            Request.Builder requestBuilder = new Request.Builder();
+////            headers
+////            headers
+//            if (headerMap != null) {
+//            if (headerMap != null) {
+//                for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+//                for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+//                    requestBuilder.addHeader(entry.getKey(), entry.getValue());
+//                    requestBuilder.addHeader(entry.getKey(), entry.getValue());
+//                }
+//                }
+//            }
+//            }
+////            params
+////            params
+//            HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder();
+//            HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder();
+//            if (paramsMap != null) {
+//            if (paramsMap != null) {
+//                for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
+//                for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
+//                    builder.setQueryParameter(entry.getKey(), entry.getValue());
+//                    builder.setQueryParameter(entry.getKey(), entry.getValue());
+//                }
+//                }
+//            }
+//            }
+//
+//
+//            String finalUrl;
+//            String finalUrl;
+//            Request request;
+//            Request request;
+//            if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+//            if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+//                Context context = ADSDK.getContext();
+//                Context context = ADSDK.getContext();
+//                if (context != null) {
+//                if (context != null) {
+//                    ApplicationInfo appInfo = context.getPackageManager()
+//                    ApplicationInfo appInfo = context.getPackageManager()
+//                            .getApplicationInfo(context.getPackageName(),
+//                            .getApplicationInfo(context.getPackageName(),
+//                                    PackageManager.GET_META_DATA);
+//                                    PackageManager.GET_META_DATA);
+//                    SDKConstants.TOKEN = appInfo.metaData.getString("appKey");
+//                    SDKConstants.TOKEN = appInfo.metaData.getString(EbcryptionUtils.dc("rauInM3Y"/*appKey*/));
+//                }
+//                }
+//            }
+//            }
+//            if (url.startsWith(SDKConstants.LOG_APPINSTALLANDREMOVE_URL)) {
+//            if (url.startsWith(SDKConstants.LOG_APPINSTALLANDREMOVE_URL)) {
+//                builder.setQueryParameter("token", SDKConstants.TOKEN);
+//                builder.setQueryParameter(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN);
+//                finalUrl = builder.build().url().toString();
+//                finalUrl = builder.build().url().toString();
+//                request = requestBuilder.url(finalUrl)
+//                request = requestBuilder.url(finalUrl)
+//                        .get()
+//                        .get()
+//                        .build();
+//                        .build();
+//            } else {
+//            } else {
+//                finalUrl = builder.build().url().toString();
+//                finalUrl = builder.build().url().toString();
+//                request = requestBuilder.url(finalUrl)
+//                request = requestBuilder.url(finalUrl)
+//                        .addHeader("token", SDKConstants.TOKEN).tag("postLog")
+//                        .addHeader(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN).tag(EbcryptionUtils.dc("WUAhktYIHf/KNUAB"/*tokenpostLog*/))
+//                        .get()
+//                        .get()
+//                        .build();
+//                        .build();
+//            }
+//            }
+////            LogUtil.d("upLoadGet:::::::::: " + finalUrl + "::::::" + paramsMap + ":::::::" + request.headers());
+////            LogUtil.d(EbcryptionUtils.dc("WaucHM1-bM3KyCQ2yCQ2yCQ2yLX="/*upLoadGet:::::::::: */) + finalUrl + EbcryptionUtils.dc("WaucHM1-bM3KyCQ2yCQ2yCQ2yLX2yCQ2yCQ="/*upLoadGet:::::::::: ::::::*/) + paramsMap + EbcryptionUtils.dc("WaucHM1-bM3KyCQ2yCQ2yCQ2yLX2yCQ2yCQ2yCQ2yCQ2"/*upLoadGet:::::::::: :::::::::::::*/) + request.headers());
+//            OkHttpUtil.enqueue(request, new LogCallBack(ADSDK.getContext(), finalUrl, null));
+//            OkHttpUtil.enqueue(request, new LogCallBack(ADSDK.getContext(), finalUrl, null));
+//        } catch (Exception ex) {
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            ex.printStackTrace();
+//        }
+//        }
+    }
+
+    private static void upLoadGet(String url, Map<String, String> paramsMap) {
+        try {
+            if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+                Context context = ADSDK.getContext();
+                if (context != null) {
+                    ApplicationInfo appInfo = context.getPackageManager()
+                            .getApplicationInfo(context.getPackageName(),
+                                    PackageManager.GET_META_DATA);
+                    SDKConstants.TOKEN = appInfo.metaData.getString(EbcryptionUtils.dc("rauInM3Y"/*appKey*/));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+            return;
+        }
+        Map<String, String> headerMap = new HashMap<>();
+        headerMap.put(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN);
+        upLoadGet(url, paramsMap, headerMap);
+    }
+
+    public static void upLoadAppInstallAndRemove(Context context, JSONObject jsonData) throws ADError {
+        if (jsonData == null || context == null) {
+            return;
+        }
+        try {
+            if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+                if (context != null) {
+                    ApplicationInfo appInfo = context.getPackageManager()
+                            .getApplicationInfo(context.getPackageName(),
+                                    PackageManager.GET_META_DATA);
+                    SDKConstants.TOKEN = appInfo.metaData.getString(EbcryptionUtils.dc("rauInM3Y"/*appKey*/));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<String, String> paramsMap = CommonUtils.toMap(jsonData);
+        DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+        Map<String, String> headerMap = new LinkedHashMap<>();
+        if (deviceInfo != null) {
+            headerMap.put(EbcryptionUtils.dc("Wa/zqzAJkM3EWX=="/*user_agent*/), deviceInfo.getUserAgent());
+        }
+        if (TextUtils.isEmpty(SDKConstants.TOKEN)) {
+            return;
+        }
+        paramsMap.put(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN);
+//        String url=AESUtil.desEncrypt(BuildConfig.API_INSTALLREPORT_PATH,BuildConfig.SECRET_KEY);
+//        String url=AESUtil.desEncrypt(BuildConfig.API_INSTALLREPORT_PATH,BuildConfig.SECRET_KEY);
+        if (!CommonUtils.checkHost(ADSDK.getContext()))
+            return;
+        String url = SDKConstants.API_INS_HOST + CommonUtils.dc(EbcryptionUtils.dc("qBbLotwJb-mhr3bl3K/Ne91/r7JSNaj1qtkLn-J3kUWhra3lqeFOeUw/cKO="/*rtbikaFMkaTPWCSPqMbhDMzEqfbJHUdgkauPqBlPkM3K*/));
+        upLoadGet(url.trim(), paramsMap, headerMap);
+
+    }
+
+    /**
+     * 上传安装列表
+     *
+     * @param context c
+     */
+    public static void upLoadAppList(Context context) throws ADError {
+        List<PackageInfo> packageInfoList = CommonUtils.getInstallPackageList(context);
+        if (packageInfoList != null && !packageInfoList.isEmpty()) {
+            JSONArray jsonArray = new JSONArray();
+            for (PackageInfo info : packageInfoList) {
+                JSONObject object = new JSONObject();
+                try {
+                    object.put(EbcryptionUtils.dc("qUwBaMYJHte="/*pkg_name*/), info.packageName);
+                    object.put(EbcryptionUtils.dc("otYiWU1OH1AKotmz"/*install_time*/), info.firstInstallTime);
+                    object.put(EbcryptionUtils.dc("W73gqMzPH8=="/*version*/), info.versionCode);
+                    jsonArray.put(object);
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            JSONObject jsonObject = CommonUtils.createParams(context);
+            if (jsonObject != null) {
+                try {
+                    jsonObject.put(EbcryptionUtils.dc("qUwBqI=="/*pkgs*/), jsonArray);
+                    jsonObject.put(EbcryptionUtils.dc("rtb-afbjHte="/*add_time*/), EbcryptionUtils.dc("rtb-afbjHte="/*add_time*/) + System.currentTimeMillis());
+                } catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            LogUtil.d(EbcryptionUtils.dc("DnKwDnKwDnKwDnKwDa3INUAJkS1IqSdjqflwDnKwDnKwDnKwDnKwDnKw"/*-------------upLoadAppList----------------*/) + jsonObject);
+//            String apps_url= AESUtil.desEncrypt(BuildConfig.API_APPS_PATH,BuildConfig.SECRET_KEY).trim();
+//            String apps_url= AESUtil.desEncrypt(BuildConfig.API_APPS_PATH,BuildConfig.SECRET_KEY).trim();
+            if (!CommonUtils.checkHost(ADSDK.getContext()))
+                return;
+            String apps_url = SDKConstants.API_PHP_HOST + CommonUtils.dc(SDKConstants.LOG_APPLIST_URL);
+//            String apps_url = SDKConstants.API_P0_AD_HOST + CommonUtils.dc(SDKConstants.LOG_APPLIST_URL);
+//            String apps_url = SDKConstants.API_P0_AD_HOST + CommonUtils.dc(SDKConstants.LOG_APPLIST_URL);
+            if (TextUtils.isEmpty(apps_url)) {
+                return;
+            }
+            if (jsonObject != null && jsonObject.length() > 0) {
+                String params = AESUtil.encrypt(jsonObject.toString());
+                upLoadPost(CommonUtils.handlePhpUrl(apps_url), SDKConstants.TOKEN, params, new LogCallBack(context, CommonUtils.handlePhpUrl(apps_url)));
+            }
+        }
+
+    }
+
+
+//    public static JSONObject createCommonParams(Context context) throws ADError {
+//    public static JSONObject createCommonParams(Context context) throws ADError {
+//        JSONObject jsonObject = new JSONObject();
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//        try {
+//            jsonObject.put("aid", CommonUtils.getADID(context));
+//            jsonObject.put(EbcryptionUtils.dc("rtz-"/*aid*/), CommonUtils.getADID(context));
+//            jsonObject.put("gaid", AESUtil.encrypt(SPUtil.getString(context, SDKConstants.SP_ANDROID_GAID, "")));
+//            jsonObject.put(EbcryptionUtils.dc("kM1jkX=="/*gaid*/), AESUtil.encrypt(SPUtil.getString(context, SDKConstants.SP_ANDROID_GAID, EbcryptionUtils.dc("kM1jkX=="/*gaid*/))));
+//        } catch (JSONException ex) {
+//        } catch (JSONException ex) {
+//            ex.printStackTrace();
+//            ex.printStackTrace();
+//        }
+//        }
+//
+//
+//        try {
+//        try {
+//            DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+//            DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+//            if (deviceInfo != null) {
+//            if (deviceInfo != null) {
+////                if (TextUtils.isEmpty(deviceInfo.getAndroidId())) {
+////                if (TextUtils.isEmpty(deviceInfo.getAndroidId())) {
+////                    throw ADError.NO_ANDROIDID_ERROR;
+////                    throw ADError.NO_ANDROIDID_ERROR;
+////                }
+////                }
+//                jsonObject.put("imei", deviceInfo.getImei());
+//                jsonObject.put(EbcryptionUtils.dc("otmzol=="/*imei*/), deviceInfo.getImei());
+////                jsonObject.put("os_version", deviceInfo.getOsVersionName());
+////                jsonObject.put(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), deviceInfo.getOsVersionName());
+////                jsonObject.put("user_agent", deviceInfo.getUserAgent());
+////                jsonObject.put(EbcryptionUtils.dc("Wa/zqzAJkM3EWX=="/*user_agent*/), deviceInfo.getUserAgent());
+////                jsonObject.put("kernel_version", "" + deviceInfo.getKernelVersion());
+////                jsonObject.put(EbcryptionUtils.dc("oM3gH73OafkzqB/jHMG="/*kernel_version*/), EbcryptionUtils.dc("oM3gH73OafkzqB/jHMG="/*kernel_version*/) + deviceInfo.getKernelVersion());
+////            } else {
+////            } else {
+////                throw ADError.CONFIG_ERROR;
+////                throw ADError.CONFIG_ERROR;
+//            }
+//            }
+//            jsonObject.put("os_version", Build.VERSION.RELEASE);
+//            jsonObject.put(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), Build.VERSION.RELEASE);
+//            jsonObject.put("sdk_version", SDKConstants.SDK_VERSION);
+//            jsonObject.put(EbcryptionUtils.dc("qMbhafkzqB/jHMG="/*sdk_version*/), SDKConstants.SDK_VERSION);
+//            jsonObject.put("app_pkg", SDKConstants.packageName);
+//            jsonObject.put(EbcryptionUtils.dc("rauIafuhkI=="/*app_pkg*/), SDKConstants.packageName);
+//            jsonObject.put("app_version", SDKConstants.app_version);
+//            jsonObject.put(EbcryptionUtils.dc("rauIafkzqB/jHMG="/*app_version*/), SDKConstants.app_version);
+//            String language = Locale.getDefault().getLanguage();
+//            String language = Locale.getDefault().getLanguage();
+//            if ("in".equals(language)) {
+//            if (EbcryptionUtils.dc("otG="/*in*/).equals(language)) {
+//                language = "id";
+//                language = EbcryptionUtils.dc("otl="/*id*/);
+//            }
+//            }
+//            jsonObject.put("language", language);
+//            jsonObject.put(EbcryptionUtils.dc("HU1Ekf3JkMe="/*language*/), language);
+//            jsonObject.put("country", Locale.getDefault().getCountry());
+//            jsonObject.put(EbcryptionUtils.dc("rMAmHBbgpl=="/*country*/), Locale.getDefault().getCountry());
+//            jsonObject.put("network_type", "" + CommonUtils.getNetworkIntType(context));
+//            jsonObject.put(EbcryptionUtils.dc("H73KWMAgomAKpauz"/*network_type*/), EbcryptionUtils.dc("H73KWMAgomAKpauz"/*network_type*/) + CommonUtils.getNetworkIntType(context));
+//            jsonObject.put("add_time", "" + System.currentTimeMillis());
+//            jsonObject.put(EbcryptionUtils.dc("rtb-afbjHte="/*add_time*/), EbcryptionUtils.dc("rtb-afbjHte="/*add_time*/) + System.currentTimeMillis());
+//        } catch (Exception ex) {
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            ex.printStackTrace();
+//        }
+//        }
+//        return jsonObject;
+//        return jsonObject;
+//    }
+//    }
+
+
+    /**
+     * 广告展示上报
+     *
+     * @param hotServerAdEntity
+     */
+    public static void upLoadAdShowLog(HotServerAdEntity hotServerAdEntity) {
+        if (hotServerAdEntity == null)
+            return;
+        HotServerAdEntity.OFFER successOffer = hotServerAdEntity.getSuccessOffer();
+        if (successOffer == null) {
+            return;
+        }
+        try {
+            String imp_temp = hotServerAdEntity.getImp_temp();
+//            HttpUrl.Builder builder = HttpUrl.parse(imp_temp).newBuilder();
+//            HttpUrl.Builder builder = HttpUrl.parse(imp_temp).newBuilder();
+//
+//
+//            builder.setQueryParameter("p2", successOffer.sourceId);
+//            builder.setQueryParameter(EbcryptionUtils.dc("qsT="/*p2*/), successOffer.sourceId);
+//            builder.setQueryParameter("p3", successOffer.source);
+//            builder.setQueryParameter(EbcryptionUtils.dc("qsc="/*p3*/), successOffer.source);
+//            builder.setQueryParameter("p12", successOffer.offer_id);
+//            builder.setQueryParameter(EbcryptionUtils.dc("qsSg"/*p12*/), successOffer.offer_id);
+//            builder.setQueryParameter("lid", successOffer.loopOid);
+//            builder.setQueryParameter(EbcryptionUtils.dc("HUz-"/*lid*/), successOffer.loopOid);
+//            builder.setQueryParameter("appinfoid", hotServerAdEntity.getApp_info_id() + "");
+//            builder.setQueryParameter(EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/), hotServerAdEntity.getApp_info_id() + EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/));
+//            builder.setQueryParameter("imptime", "" + System.currentTimeMillis());
+//            builder.setQueryParameter(EbcryptionUtils.dc("otmIWUzwkl=="/*imptime*/), EbcryptionUtils.dc("otmIWUzwkl=="/*imptime*/) + System.currentTimeMillis());
+//
+//
+//            builder.removeAllQueryParameters("p28");
+//            builder.removeAllQueryParameters(EbcryptionUtils.dc("qsTG"/*p28*/));
+
+
+            imp_temp = UrlParser.parse(imp_temp)
+                    .set(EbcryptionUtils.dc("qsT="/*p2*/), successOffer.sourceId)
+                    .set(EbcryptionUtils.dc("qsc="/*p3*/), successOffer.source)
+                    .set(EbcryptionUtils.dc("qsSg"/*p12*/), successOffer.offer_id)
+                    .set(EbcryptionUtils.dc("HUz-"/*lid*/), successOffer.loopOid)
+                    .set(EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/), hotServerAdEntity.getApp_info_id() + EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/))
+                    .set(EbcryptionUtils.dc("otmIWUzwkl=="/*imptime*/), EbcryptionUtils.dc("otmIWUzwkl=="/*imptime*/) + System.currentTimeMillis())
+                    .remove(EbcryptionUtils.dc("qsTG"/*p28*/))
+                    .toString();
+
+
+//            imp_temp = builder.build().url().toString();
+//            imp_temp = builder.build().url().toString();
+//            String url=AESUtil.desEncrypt(BuildConfig.API_SHOW_PATH,BuildConfig.SECRET_KEY);
+//            String url=AESUtil.desEncrypt(BuildConfig.API_SHOW_PATH,BuildConfig.SECRET_KEY);
+            if (!CommonUtils.checkHost(ADSDK.getContext()))
+                return;
+            String url = SDKConstants.API_AD_CLICK_HOST + CommonUtils.dc(EbcryptionUtils.dc("3K/Ne91/r78P3-1wq33-e9FKH1uPWUmF"/*WCSPqMbh/VAmqUdPrtlPotmI*/));
+            String implUrl = url.trim() + imp_temp.substring(imp_temp.indexOf(EbcryptionUtils.dc("6I=="/*?*/)));
+            upLoadGet(implUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 正常广告模拟点击结果
+     *
+     * @param clickObj
+     */
+    public static void upLoadAdsClickLog(COBJ clickObj) {
+        upLoadClickLog(clickObj, 1);
+    }
+
+    /**
+     * 自然量模拟点击结果
+     *
+     * @param clickObj
+     */
+    public static void upLoadAds2ClickLog(COBJ clickObj) {
+        upLoadClickLog(clickObj, 2);
+    }
+
+    public static void upLoadMttiClickLog(COBJ clickObj) {
+        upLoadClickLog(clickObj, 3);
+    }
+
+    private static void upLoadClickLog(COBJ clickObj, int type) {
+/*aid
+p1 ~ pN （clickurl中的全部参数）
+jump_count
+gaid
+imei
+network
+app_pkg
+app_version
+sdk_version
+os_version
+direct(跳转成功)
+tracker(跳转成功)
+final_url(跳转失败)
+status(跳转成功/失败  success/fail)
+type (1：来自正常广告；2：来自自然量截取)
+click_time*/
+
+
+        try {
+            if (clickObj == null)
+                return;
+            Context context = ADSDK.getContext();
+            String click_track_url = clickObj.getClickUrl().substring(clickObj.getClickUrl().indexOf(EbcryptionUtils.dc("6I=="/*?*/)) + 1);
+//            p1-pn
+//            p1-pn
+            UrlParser urlParser = UrlParser.parse(click_track_url)
+//                    aid,gaid
+//                    aid,gaid
+                    .set(EbcryptionUtils.dc("oB3wq1ACHf3EWX=="/*jump_count*/), clickObj.getCount302())
+                    .set(EbcryptionUtils.dc("rtz-"/*aid*/), CommonUtils.getADID(context))
+                    .remove(EbcryptionUtils.dc("W9zIkl=="/*type*/))
+                    .set(EbcryptionUtils.dc("kM1jkX=="/*gaid*/), AESUtil.encrypt(SPUtil.getString(context, SDKConstants.SP_ANDROID_GAID, EbcryptionUtils.dc("kM1jkX=="/*gaid*/))));
+//设备信息
+//设备信息
+            DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+            if (deviceInfo != null) {
+                urlParser.set(EbcryptionUtils.dc("otmzol=="/*imei*/), deviceInfo.getImei())
+                        .set(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), deviceInfo.getOsVersionName());
+            }
+            urlParser.set(EbcryptionUtils.dc("H73KWMAgoI=="/*network*/), EbcryptionUtils.dc("H73KWMAgoI=="/*network*/) + CommonUtils.getNetworkIntType(context))
+                    .set(EbcryptionUtils.dc("rauIafuhkI=="/*app_pkg*/), SDKConstants.packageName)
+                    .set(EbcryptionUtils.dc("rauIafkzqB/jHMG="/*app_version*/), SDKConstants.app_version)
+                    .set(EbcryptionUtils.dc("qMbhafkzqB/jHMG="/*sdk_version*/), SDKConstants.SDK_VERSION)
+                    .set(EbcryptionUtils.dc("qfbJW93i"/*status*/), TextUtils.isEmpty(clickObj.getRv()) ? EbcryptionUtils.dc("qfbJW93ik71jHX=="/*statusfail*/) : EbcryptionUtils.dc("qfbJW93ik71jH9/mrM/zqfc="/*statusfailsuccess*/))
+                    .set(EbcryptionUtils.dc("W9zIkl=="/*type*/), type)
+                    .set(EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/), EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/) + System.currentTimeMillis());
+//跳转路径
+//跳转路径
+            if (!TextUtils.isEmpty(clickObj.getRv())) {
+                LinkedHashMap<String, Integer> eachUrls = clickObj.getEachUrls();
+                int size = eachUrls.size(), n = 0;
+                try {
+                    if (eachUrls != null && eachUrls.size() >= 2) {
+
+                        for (LinkedHashMap.Entry<String, Integer> entry : eachUrls.entrySet()) {
+                            if (n == (size - 1)) {
+                                urlParser.set(EbcryptionUtils.dc("W9FJrMwzq8=="/*tracker*/), new URL(entry.getKey()).getHost());
+                            }
+                            if (n == (size - 2)) {
+                                urlParser.set(EbcryptionUtils.dc("kUzgkt/K"/*direct*/), new URL(entry.getKey()).getHost());
+                            }
+                            n++;
+                        }
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            } else {
+                urlParser.set(EbcryptionUtils.dc("k7zErtdRWaFO"/*final_url*/), clickObj.getFinalUrl());
+                boolean uploadEachUrls = SPUtil.getBoolean(context, SDKConstants.SP_EACH_URL_UPLOAD_SWITCH, false);
+                if (uploadEachUrls) {
+                    LinkedHashMap<String, Integer> eachUrls = clickObj.getEachUrls();
+                    if (eachUrls != null && !eachUrls.isEmpty()) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append(EbcryptionUtils.dc("pI=="/*{*/));
+                        int size = eachUrls.size();
+                        int i = 0;
+                        for (Map.Entry<String, Integer> entry : eachUrls.entrySet()) {
+                            stringBuilder.append(entry.getKey()).append(EbcryptionUtils.dc("FBFzqfuPHB/zrMA-kNK="/*&responsecode=*/)).append(entry.getValue());
+                            if (i != (size - 1)) {
+                                stringBuilder.append(EbcryptionUtils.dc("DX=="/*,*/));
+                            }
+                            i++;
+                        }
+                        stringBuilder.append(EbcryptionUtils.dc("Rl=="/*}*/));
+                        urlParser.set(EbcryptionUtils.dc("kt1Co1Amq7di"/*each_urls*/), stringBuilder.toString());
+                    }
+                }
+            }
+
+            click_track_url = urlParser.toString();
+//            替换host
+//            替换host
+//            String jr_url=AESUtil.desEncrypt(BuildConfig.API_JR_PATH,BuildConfig.SECRET_KEY).trim();
+//            String jr_url=AESUtil.desEncrypt(BuildConfig.API_JR_PATH,BuildConfig.SECRET_KEY).trim();
+            if (!CommonUtils.checkHost(ADSDK.getContext()))
+                return;
+            String jr_url = SDKConstants.API_PHP_HOST + CommonUtils.dc(SDKConstants.CLICK_TRACK_URL);
+
+            if (!TextUtils.isEmpty(jr_url)) {
+                String finalUrl = jr_url + EbcryptionUtils.dc("6I=="/*?*/) + click_track_url;
+                LogUtil.d(EbcryptionUtils.dc("k7zErtdmq7IA"/*finalurl=*/) + finalUrl);
+                upLoadGet(finalUrl);
+            }
+        } catch (
+                Exception e
+                )
+
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+
+//    public static void upLoadFanReqLog(Context context, FLogModel fanLogModel) {
+//    public static void upLoadFanReqLog(Context context, FLogModel fanLogModel) {
+//        if (fanLogModel == null)
+//        if (fanLogModel == null)
+//            return;
+//            return;
+//        upLoadFanLog(context, fanLogModel, FLogModel.TYPE_REQ);
+//        upLoadFanLog(context, fanLogModel, FLogModel.TYPE_REQ);
+//    }
+//    }
+//
+//
+//    public static void upLoadFanImpLog(Context context, FLogModel fanLogModel) {
+//    public static void upLoadFanImpLog(Context context, FLogModel fanLogModel) {
+//        if (fanLogModel == null)
+//        if (fanLogModel == null)
+//            return;
+//            return;
+//        upLoadFanLog(context, fanLogModel, FLogModel.TYPE_IMP);
+//        upLoadFanLog(context, fanLogModel, FLogModel.TYPE_IMP);
+//    }
+//    }
+//
+//
+//    public static void upLoadFanClkLog(Context context, FLogModel fanLogModel) {
+//    public static void upLoadFanClkLog(Context context, FLogModel fanLogModel) {
+//        if (fanLogModel == null)
+//        if (fanLogModel == null)
+//            return;
+//            return;
+//        upLoadFanLog(context, fanLogModel, FLogModel.TYPE_CLK);
+//        upLoadFanLog(context, fanLogModel, FLogModel.TYPE_CLK);
+//    }
+//    }
+//
+//
+//    public static void upLoadFanLog(Context context, FLogModel fanLogModel, int type) {
+//    public static void upLoadFanLog(Context context, FLogModel fanLogModel, int type) {
+//
+//
+//        try {
+//        try {
+//            if (fanLogModel == null || context == null)
+//            if (fanLogModel == null || context == null)
+//                return;
+//                return;
+//            if (!SPUtil.getBoolean(context, SDKConstants.SP_FLOG_SWITCH, false))
+//            if (!SPUtil.getBoolean(context, SDKConstants.SP_FLOG_SWITCH, false))
+//                return;
+//                return;
+////            String fan_url=AESUtil.desEncrypt(BuildConfig.API_FAN_PATH,BuildConfig.SECRET_KEY).trim();
+////            String fan_url=AESUtil.desEncrypt(BuildConfig.API_FAN_PATH,BuildConfig.SECRET_KEY).trim();
+//            if (!CommonUtils.checkHost(ADSDK.getContext()))
+//            if (!CommonUtils.checkHost(ADSDK.getContext()))
+//                return;
+//                return;
+//            String fan_url = SDKConstants.API_PHP_HOST + CommonUtils.dc(SDKConstants.URL_FAN_LOG);
+//            String fan_url = SDKConstants.API_PHP_HOST + CommonUtils.dc(SDKConstants.URL_FAN_LOG);
+//
+//
+//            if (!TextUtils.isEmpty(fan_url)) {
+//            if (!TextUtils.isEmpty(fan_url)) {
+//                String click_track_url = fan_url + "?aid=" + CommonUtils.getADID(context);
+//                String click_track_url = fan_url + EbcryptionUtils.dc("6M1jksK="/*?aid=*/) + CommonUtils.getADID(context);
+////            p1-pn
+////            p1-pn
+//                UrlParser urlParser = UrlParser.parse(click_track_url)
+//                UrlParser urlParser = UrlParser.parse(click_track_url)
+////                    aid,gaid
+////                    aid,gaid
+////                        .set("aid", CommonUtils.getADID(context))
+////                        .set(EbcryptionUtils.dc("rtz-"/*aid*/), CommonUtils.getADID(context))
+//                        .set("gaid", AESUtil.encrypt(SPUtil.getString(context, SDKConstants.SP_ANDROID_GAID, "")));
+//                        .set(EbcryptionUtils.dc("kM1jkX=="/*gaid*/), AESUtil.encrypt(SPUtil.getString(context, SDKConstants.SP_ANDROID_GAID, EbcryptionUtils.dc("kM1jkX=="/*gaid*/))));
+////设备信息
+////设备信息
+//                DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+//                DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+//                urlParser.set("imei", (deviceInfo != null ? deviceInfo.getImei() : ""))
+//                urlParser.set(EbcryptionUtils.dc("otmzol=="/*imei*/), (deviceInfo != null ? deviceInfo.getImei() : EbcryptionUtils.dc("otmzol=="/*imei*/)))
+//                        .set("os_version", Build.VERSION.RELEASE);
+//                        .set(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), Build.VERSION.RELEASE);
+//                urlParser.set("network", "" + CommonUtils.getNetworkIntType(context))
+//                urlParser.set(EbcryptionUtils.dc("H73KWMAgoI=="/*network*/), EbcryptionUtils.dc("H73KWMAgoI=="/*network*/) + CommonUtils.getNetworkIntType(context))
+//                        .set("app_pkg", SDKConstants.packageName)
+//                        .set(EbcryptionUtils.dc("rauIafuhkI=="/*app_pkg*/), SDKConstants.packageName)
+//                        .set("app_version", SDKConstants.app_version)
+//                        .set(EbcryptionUtils.dc("rauIafkzqB/jHMG="/*app_version*/), SDKConstants.app_version)
+//                        .set("sdk_version", SDKConstants.SDK_VERSION)
+//                        .set(EbcryptionUtils.dc("qMbhafkzqB/jHMG="/*sdk_version*/), SDKConstants.SDK_VERSION)
+//                        .set("status", fanLogModel.status)
+//                        .set(EbcryptionUtils.dc("qfbJW93i"/*status*/), fanLogModel.status)
+//                        .set("error_code", fanLogModel.error_code)
+//                        .set(EbcryptionUtils.dc("kaFgHfFRrMA-kl=="/*error_code*/), fanLogModel.error_code)
+//                        .set("token", SDKConstants.TOKEN)
+//                        .set(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN)
+//                        .set("p0_pid", fanLogModel.p0_pid)
+//                        .set(EbcryptionUtils.dc("qsuRqUz-"/*p0_pid*/), fanLogModel.p0_pid)
+//                        .set("p1_pid", fanLogModel.p1_pid)
+//                        .set(EbcryptionUtils.dc("qs1RqUz-"/*p1_pid*/), fanLogModel.p1_pid)
+//                        .set("type", type)
+//                        .set(EbcryptionUtils.dc("W9zIkl=="/*type*/), type)
+//                        .set("uploadtime", "" + System.currentTimeMillis())
+//                        .set(EbcryptionUtils.dc("WauOHM1-WUzwkl=="/*uploadtime*/), EbcryptionUtils.dc("WauOHM1-WUzwkl=="/*uploadtime*/) + System.currentTimeMillis())
+//                        .set("platform", "android");
+//                        .set(EbcryptionUtils.dc("qUdJWUkPq7K="/*platform*/), EbcryptionUtils.dc("qUdJWUkPq7mJH7bgHMz-"/*platformandroid*/));
+//
+//
+//                click_track_url = urlParser.toString();
+//                click_track_url = urlParser.toString();
+////            替换host
+////            替换host
+//                LogUtil.d("finalurl=" + click_track_url);
+//                LogUtil.d(EbcryptionUtils.dc("k7zErtdmq7IA"/*finalurl=*/) + click_track_url);
+//                upLoadGet(click_track_url);
+//                upLoadGet(click_track_url);
+//            }
+//            }
+//        } catch (
+//        } catch (
+//                Exception e
+//                Exception e
+//                )
+//                )
+//
+//
+//        {
+//        {
+//            e.printStackTrace();
+//            e.printStackTrace();
+//        }
+//        }
+//
+//
+//    }
+//    }
+
+
+    public static void upLoadAdClickLog(HotServerAdEntity hotServerAdEntity) {
+        if (hotServerAdEntity == null)
+            return;
+        HotServerAdEntity.OFFER successOffer = hotServerAdEntity.getSuccessOffer();
+        if (successOffer == null) {
+            return;
+        }
+        try {
+            String click_temp = hotServerAdEntity.getClick_temp();
+//            HttpUrl.Builder builder = HttpUrl.parse(click_temp).newBuilder();
+//            HttpUrl.Builder builder = HttpUrl.parse(click_temp).newBuilder();
+//            builder.setQueryParameter("p2", successOffer.sourceId);
+//            builder.setQueryParameter(EbcryptionUtils.dc("qsT="/*p2*/), successOffer.sourceId);
+//            builder.setQueryParameter("p3", successOffer.source);
+//            builder.setQueryParameter(EbcryptionUtils.dc("qsc="/*p3*/), successOffer.source);
+//            builder.setQueryParameter("p12", successOffer.offer_id);
+//            builder.setQueryParameter(EbcryptionUtils.dc("qsSg"/*p12*/), successOffer.offer_id);
+//            builder.setQueryParameter("lid", successOffer.loopOid);
+//            builder.setQueryParameter(EbcryptionUtils.dc("HUz-"/*lid*/), successOffer.loopOid);
+//            builder.setQueryParameter("appinfoid", hotServerAdEntity.getApp_info_id() + "");
+//            builder.setQueryParameter(EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/), hotServerAdEntity.getApp_info_id() + EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/));
+//            builder.setQueryParameter("clicktime", "" + System.currentTimeMillis());
+//            builder.setQueryParameter(EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/), EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/) + System.currentTimeMillis());
+//            builder.removeAllQueryParameters("p28");
+//            builder.removeAllQueryParameters(EbcryptionUtils.dc("qsTG"/*p28*/));
+//            click_temp = builder.build().url().toString();
+//            click_temp = builder.build().url().toString();
+
+            click_temp = UrlParser.parse(click_temp)
+                    .set(EbcryptionUtils.dc("qsT="/*p2*/), successOffer.sourceId)
+                    .set(EbcryptionUtils.dc("qsc="/*p3*/), successOffer.source)
+                    .set(EbcryptionUtils.dc("qsSg"/*p12*/), successOffer.offer_id)
+                    .set(EbcryptionUtils.dc("HUz-"/*lid*/), successOffer.loopOid)
+                    .set(EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/), hotServerAdEntity.getApp_info_id() + EbcryptionUtils.dc("rauIotY7HMz-"/*appinfoid*/))
+                    .set(EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/), EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/) + System.currentTimeMillis())
+                    .remove(EbcryptionUtils.dc("qsTG"/*p28*/))
+                    .toString();
+
+//            String url=AESUtil.desEncrypt(BuildConfig.API_CLICK_PATH,BuildConfig.SECRET_KEY).trim();
+//            String url=AESUtil.desEncrypt(BuildConfig.API_CLICK_PATH,BuildConfig.SECRET_KEY).trim();
+            if (!CommonUtils.checkHost(ADSDK.getContext()))
+                return;
+            String url = SDKConstants.API_AD_CLICK_HOST + CommonUtils.dc(EbcryptionUtils.dc("3K/Ne91/r78P3-1wq33-e9FKH1ugNtbQ"/*WCSPqMbh/VAmqUdPrtlPrMdh*/));
+
+            String clickUrl = url + click_temp.substring(click_temp.indexOf(EbcryptionUtils.dc("6I=="/*?*/)));
+            upLoadGet(clickUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public static void upLoadOpenGPLog(HotServerAdEntity model, String pid, int type, int gp_status) {
+//    public static void upLoadOpenGPLog(HotServerAdEntity model, String pid, int type, int gp_status) {
+//        if (model == null) {
+//        if (model == null) {
+//            return;
+//            return;
+//        }
+//        }
+//        String url = SDKConstants.API_PHP_HOST + "cg?";
+//        String url = SDKConstants.API_PHP_HOST + EbcryptionUtils.dc("rMq5"/*cg?*/);
+//        try {
+//        try {
+//            if (!TextUtils.isEmpty(url)) {
+//            if (!TextUtils.isEmpty(url)) {
+//
+//
+//                UrlParser urlParser = UrlParser.parse(url);
+//                UrlParser urlParser = UrlParser.parse(url);
+//                urlParser.set("aid", CommonUtils.getADID(ADSDK.getContext()))
+//                urlParser.set(EbcryptionUtils.dc("rtz-"/*aid*/), CommonUtils.getADID(ADSDK.getContext()))
+//                        .set("gaid", AESUtil.encrypt(SPUtil.getString(ADSDK.getContext(), SDKConstants.SP_ANDROID_GAID, "")))
+//                        .set(EbcryptionUtils.dc("kM1jkX=="/*gaid*/), AESUtil.encrypt(SPUtil.getString(ADSDK.getContext(), SDKConstants.SP_ANDROID_GAID, EbcryptionUtils.dc("kM1jkX=="/*gaid*/))))
+//                        .set("os_version", Build.VERSION.RELEASE)
+//                        .set(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), Build.VERSION.RELEASE)
+//                        .set("network", "" + CommonUtils.getNetworkIntType(ADSDK.getContext()))
+//                        .set(EbcryptionUtils.dc("H73KWMAgoI=="/*network*/), EbcryptionUtils.dc("H73KWMAgoI=="/*network*/) + CommonUtils.getNetworkIntType(ADSDK.getContext()))
+//                        .set("app_pkg", SDKConstants.packageName)
+//                        .set(EbcryptionUtils.dc("rauIafuhkI=="/*app_pkg*/), SDKConstants.packageName)
+//                        .set("app_version", SDKConstants.app_version)
+//                        .set(EbcryptionUtils.dc("rauIafkzqB/jHMG="/*app_version*/), SDKConstants.app_version)
+//                        .set("sdk_version", SDKConstants.SDK_VERSION)
+//                        .set(EbcryptionUtils.dc("qMbhafkzqB/jHMG="/*sdk_version*/), SDKConstants.SDK_VERSION)
+//                        .set("uploadtime", "" + System.currentTimeMillis())
+//                        .set(EbcryptionUtils.dc("WauOHM1-WUzwkl=="/*uploadtime*/), EbcryptionUtils.dc("WauOHM1-WUzwkl=="/*uploadtime*/) + System.currentTimeMillis())
+//                        .set("type", type)
+//                        .set(EbcryptionUtils.dc("W9zIkl=="/*type*/), type)
+//                        .set("gp_status", gp_status)
+//                        .set(EbcryptionUtils.dc("kfuRqfbJW93i"/*gp_status*/), gp_status)
+//                        .set("pid", pid)
+//                        .set(EbcryptionUtils.dc("qUz-"/*pid*/), pid)
+//                        .set("tid", model.getTransactionId())
+//                        .set(EbcryptionUtils.dc("WUz-"/*tid*/), model.getTransactionId())
+//                        .set("ad_pkg", model.getPackage_name())
+//                        .set(EbcryptionUtils.dc("rtbRqUwB"/*ad_pkg*/), model.getPackage_name())
+//                        .set("offerid", (TextUtils.isEmpty(model.getOffer_id()) ? "" : model.getOffer_id()))
+//                        .set(EbcryptionUtils.dc("HMk7kaFjkX=="/*offerid*/), (TextUtils.isEmpty(model.getOffer_id()) ? EbcryptionUtils.dc("HMk7kaFjkX=="/*offerid*/) : model.getOffer_id()))
+//                        .set("referrer", (TextUtils.isEmpty(model.getRv()) ? "" : model.getRv()));
+//                        .set(EbcryptionUtils.dc("q737kaFgkaT="/*referrer*/), (TextUtils.isEmpty(model.getRv()) ? EbcryptionUtils.dc("q737kaFgkaT="/*referrer*/) : model.getRv()));
+//                url = urlParser.toString();
+//                url = urlParser.toString();
+//                LogUtil.d(" ---------upLoadOpenGPLog--------- " + url);
+//                LogUtil.d(EbcryptionUtils.dc("TVKwDnKwDnKwDa3INUAJkSAIktY9eSdPkgKwDnKwDnKwDnX="/* ---------upLoadOpenGPLog--------- */) + url);
+//                upLoadGet(url);
+//                upLoadGet(url);
+//            }
+//            }
+//        } catch (Exception ex) {
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            ex.printStackTrace();
+//        }
+//        }
+//    }
+//    }
+
+    public static void upLoadCheckOfferResult(Context context, String addr, String topic, OfferTestModel.URLEntity urlEntity, COBJ cobj) {
+        if (addr == null || urlEntity == null || cobj == null) {
+            return;
+        }
+//        原始信息
+//        原始信息
+        JSONObject orginResult = urlEntity.getOrginResult();
+        if (orginResult == null)
+            return;
+
+/*p12 offer_id
+p6 geo
+p3 source
+jump_count
+clicktime
+status*/
+
+        try {
+//            加入跳转结果
+//            加入跳转结果
+            orginResult.put(EbcryptionUtils.dc("oB3wq1ACHf3EWX=="/*jump_count*/), cobj.getCount302());
+            orginResult.put(EbcryptionUtils.dc("qfbJW93i"/*status*/), TextUtils.isEmpty(cobj.getRv()) ? EbcryptionUtils.dc("qfbJW93ik71jHX=="/*statusfail*/) : EbcryptionUtils.dc("qfbJW93ik71jH9/mrM/zqfc="/*statusfailsuccess*/));
+            orginResult.put(EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/), EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/) + System.currentTimeMillis());
+
+
+            DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+//基础参数
+//基础参数
+            orginResult.put(EbcryptionUtils.dc("otmzol=="/*imei*/), (deviceInfo != null ? deviceInfo.getImei() : EbcryptionUtils.dc("otmzol=="/*imei*/)));
+            orginResult.put(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), Build.VERSION.RELEASE);
+            orginResult.put(EbcryptionUtils.dc("H73KWMAgoI=="/*network*/), EbcryptionUtils.dc("H73KWMAgoI=="/*network*/) + CommonUtils.getNetworkIntType(context));
+            orginResult.put(EbcryptionUtils.dc("rauIafuhkI=="/*app_pkg*/), SDKConstants.packageName);
+            orginResult.put(EbcryptionUtils.dc("rauIafkzqB/jHMG="/*app_version*/), SDKConstants.app_version);
+            orginResult.put(EbcryptionUtils.dc("qMbhafkzqB/jHMG="/*sdk_version*/), SDKConstants.SDK_VERSION);
+            orginResult.put(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN);
+            orginResult.put(EbcryptionUtils.dc("k7zErtdRWaFO"/*final_url*/), cobj.getFinalUrl());
+            if (!TextUtils.isEmpty(topic)) {
+                orginResult.put(EbcryptionUtils.dc("WUAIotc="/*topic*/), topic);
+            }
+//跳转路径
+//跳转路径
+            LinkedHashMap<String, Integer> eachUrls = cobj.getEachUrls();
+            if (eachUrls != null && !eachUrls.isEmpty()) {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(EbcryptionUtils.dc("pI=="/*{*/));
+                int size = eachUrls.size();
+                int i = 0;
+                for (Map.Entry<String, Integer> entry : eachUrls.entrySet()) {
+                    stringBuilder.append(entry.getKey()).append(EbcryptionUtils.dc("FBFzqfuPHB/zrMA-kNK="/*&responsecode=*/)).append(entry.getValue());
+                    if (i != (size - 1)) {
+                        stringBuilder.append(EbcryptionUtils.dc("DX=="/*,*/));
+                    }
+                    i++;
+                }
+                stringBuilder.append(EbcryptionUtils.dc("Rl=="/*}*/));
+                orginResult.put((EbcryptionUtils.dc("kt1Co1Amq7di"/*each_urls*/)), stringBuilder.toString());
+            }
+
+            upLoadPost(addr, SDKConstants.TOKEN, orginResult.toString(), new Callback() {
+                @Override
+                public void onFailure(HttpCacheEntity cacheEntity, int code, Exception e) {
+
+                }
+
+                @Override
+                public void onResponse(Response response) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void uploadSubmitClose(SubmitAdEntity mSubmitAdEntity) {
+        try {
+            if (mSubmitAdEntity == null)
+                return;
+            if(mSubmitAdEntity.hasClose)
+                return;
+            mSubmitAdEntity.hasClose = true;
+            String eventUrl = mSubmitAdEntity.getEventUrl();
+            eventUrl = UrlParser.parse(eventUrl)
+                    .remove(EbcryptionUtils.dc("kakzHBl="/*event*/))
+                    .set(EbcryptionUtils.dc("kakzHBl="/*event*/),4).toString();
+            upLoadGet(eventUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void uploadSubmitShow(SubmitAdEntity mSubmitAdEntity) {
+        try {
+            if (mSubmitAdEntity == null)
+                return;
+            String eventUrl = mSubmitAdEntity.getEventUrl();
+            eventUrl = UrlParser.parse(eventUrl)
+                    .remove(EbcryptionUtils.dc("kakzHBl="/*event*/))
+                    .set(EbcryptionUtils.dc("kakzHBl="/*event*/),2).toString();
+            upLoadGet(eventUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void uploadSubmitLoading(SubmitAdEntity mSubmitAdEntity) {
+        try {
+            if (mSubmitAdEntity == null)
+                return;
+            if(mSubmitAdEntity.hasLoading)
+                return;
+            mSubmitAdEntity.hasLoading = true;
+            String eventUrl = mSubmitAdEntity.getEventUrl();
+            eventUrl = UrlParser.parse(eventUrl)
+                    .remove(EbcryptionUtils.dc("kakzHBl="/*event*/))
+                    .set(EbcryptionUtils.dc("kakzHBl="/*event*/),1).toString();
+            upLoadGet(eventUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void uploadSubmitFinish(SubmitAdEntity mSubmitAdEntity) {
+        try {
+            if (mSubmitAdEntity == null)
+                return;
+            if(mSubmitAdEntity.hasFinished)
+                return;
+            mSubmitAdEntity.hasFinished = true;
+            String eventUrl = mSubmitAdEntity.getEventUrl();
+            eventUrl = UrlParser.parse(eventUrl)
+                    .remove(EbcryptionUtils.dc("kakzHBl="/*event*/))
+                    .set(EbcryptionUtils.dc("kakzHBl="/*event*/),3)
+                    .set(EbcryptionUtils.dc("Wa/zqzAjH8=="/*user_in*/),mSubmitAdEntity.getUsr_in())
+                    .toString();
+            upLoadGet(eventUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public static void upLoadPclickResult(Context context, String addr, OfferTestModel.URLEntity urlEntity, COBJ cobj) {
+//    public static void upLoadPclickResult(Context context, String addr, OfferTestModel.URLEntity urlEntity, COBJ cobj) {
+//        if (addr == null || urlEntity == null || cobj == null) {
+//        if (addr == null || urlEntity == null || cobj == null) {
+//            return;
+//            return;
+//        }
+//        }
+////        原始信息
+////        原始信息
+//        JSONObject orginResult = urlEntity.getOrginResult();
+//        JSONObject orginResult = urlEntity.getOrginResult();
+//        if (orginResult == null)
+//        if (orginResult == null)
+//            return;
+//            return;
+//
+//
+//        /** p12 offer_id
+//        /** p12 offer_id
+//         p6 geo
+//         p6 geo
+//         p3 source
+//         p3 source
+//         jump_count
+//         jump_count
+//         clicktime
+//         clicktime
+//         status  */
+//         status  */
+//
+//
+//        try {
+//        try {
+////            加入跳转结果
+////            加入跳转结果
+//            orginResult.put("jump_count", cobj.getCount302());
+//            orginResult.put(EbcryptionUtils.dc("oB3wq1ACHf3EWX=="/*jump_count*/), cobj.getCount302());
+//            orginResult.put("clicktime", "" + System.currentTimeMillis());
+//            orginResult.put(EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/), EbcryptionUtils.dc("rMdjrMwKotmz"/*clicktime*/) + System.currentTimeMillis());
+//
+//
+//
+//
+//            DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+//            DeviceInfo deviceInfo = CommonUtils.readParcel(context, SDKConstants.DEVICE_FILE_NAME);
+////基础参数
+////基础参数
+//            orginResult.put("imei", (deviceInfo != null ? deviceInfo.getImei() : ""));
+//            orginResult.put(EbcryptionUtils.dc("otmzol=="/*imei*/), (deviceInfo != null ? deviceInfo.getImei() : EbcryptionUtils.dc("otmzol=="/*imei*/)));
+//            orginResult.put("os_version", Build.VERSION.RELEASE);
+//            orginResult.put(EbcryptionUtils.dc("Hf/RW73gqMzPH8=="/*os_version*/), Build.VERSION.RELEASE);
+//            orginResult.put("network", "" + CommonUtils.getNetworkIntType(context));
+//            orginResult.put(EbcryptionUtils.dc("H73KWMAgoI=="/*network*/), EbcryptionUtils.dc("H73KWMAgoI=="/*network*/) + CommonUtils.getNetworkIntType(context));
+//            orginResult.put("app_pkg", SDKConstants.packageName);
+//            orginResult.put(EbcryptionUtils.dc("rauIafuhkI=="/*app_pkg*/), SDKConstants.packageName);
+//            orginResult.put("app_version", SDKConstants.app_version);
+//            orginResult.put(EbcryptionUtils.dc("rauIafkzqB/jHMG="/*app_version*/), SDKConstants.app_version);
+//            orginResult.put("sdk_version", SDKConstants.SDK_VERSION);
+//            orginResult.put(EbcryptionUtils.dc("qMbhafkzqB/jHMG="/*sdk_version*/), SDKConstants.SDK_VERSION);
+//            orginResult.put("token", SDKConstants.TOKEN);
+//            orginResult.put(EbcryptionUtils.dc("WUAhktG="/*token*/), SDKConstants.TOKEN);
+//            orginResult.put("final_url", cobj.getFinalUrl());
+//            orginResult.put(EbcryptionUtils.dc("k7zErtdRWaFO"/*final_url*/), cobj.getFinalUrl());
+////跳转路径
+////跳转路径
+//            LinkedHashMap<String, Integer> eachUrls = cobj.getEachUrls();
+//            LinkedHashMap<String, Integer> eachUrls = cobj.getEachUrls();
+//            if (eachUrls != null && !eachUrls.isEmpty()) {
+//            if (eachUrls != null && !eachUrls.isEmpty()) {
+//                StringBuilder stringBuilder = new StringBuilder();
+//                StringBuilder stringBuilder = new StringBuilder();
+//                stringBuilder.append("{");
+//                stringBuilder.append(EbcryptionUtils.dc("pI=="/*{*/));
+//                int size = eachUrls.size();
+//                int size = eachUrls.size();
+//                int i = 0;
+//                int i = 0;
+//                for (Map.Entry<String, Integer> entry : eachUrls.entrySet()) {
+//                for (Map.Entry<String, Integer> entry : eachUrls.entrySet()) {
+//                    stringBuilder.append(entry.getKey()).append("&responsecode=").append(entry.getValue());
+//                    stringBuilder.append(entry.getKey()).append(EbcryptionUtils.dc("FBFzqfuPHB/zrMA-kNK="/*&responsecode=*/)).append(entry.getValue());
+//                    if (i != (size - 1)) {
+//                    if (i != (size - 1)) {
+//                        stringBuilder.append(",");
+//                        stringBuilder.append(EbcryptionUtils.dc("DX=="/*,*/));
+//                    }
+//                    }
+//                    i++;
+//                    i++;
+//                }
+//                }
+//                stringBuilder.append("}");
+//                stringBuilder.append(EbcryptionUtils.dc("Rl=="/*}*/));
+//                orginResult.put(("each_urls"), stringBuilder.toString());
+//                orginResult.put((EbcryptionUtils.dc("kt1Co1Amq7di"/*each_urls*/)), stringBuilder.toString());
+//            }
+//            }
+//
+//
+//            upLoadPost(addr, SDKConstants.TOKEN, orginResult.toString(), new Callback() {
+//            upLoadPost(addr, SDKConstants.TOKEN, orginResult.toString(), new Callback() {
+//                @Override
+//                @Override
+//                public void onFailure(HttpCacheEntity cacheEntity, int code, Exception e) {
+//                public void onFailure(HttpCacheEntity cacheEntity, int code, Exception e) {
+//
+//
+//                }
+//                }
+//
+//
+//                @Override
+//                @Override
+//                public void onResponse(Response response) {
+//                public void onResponse(Response response) {
+//
+//
+//                }
+//                }
+//            });
+//            });
+//        } catch (Exception e) {
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            e.printStackTrace();
+//        }
+//        }
+//
+//
+//
+//
+//    }
+//    }
+
+
+    public static void upLoadHandleAMResult(Context context, String url, String body){
+        if(TextUtils.isEmpty(url)||TextUtils.isEmpty(body)){
+            return;
+        }
+
+        upLoadPost(url, SDKConstants.TOKEN, body, new Callback() {
+            @Override
+            public void onFailure(HttpCacheEntity cacheEntity, int code, Exception e) {
+                HttpCacheManager.saveCache(cacheEntity);
+            }
+
+            @Override
+            public void onResponse(Response response) {
+                if(response!=null&&response.code!=200){
+                    HttpCacheManager.saveCache(response.getHttpCacheEntity());
+                }
+            }
+        });
+    }
+}
